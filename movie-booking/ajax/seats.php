@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/../includes/functions.php';header('Content-Type: application/json');$id=(int)($_GET['show']??0);$q=db()->prepare("SELECT bs.seat_number FROM booked_seats bs JOIN bookings b ON b.id=bs.booking_id WHERE bs.show_id=? AND b.status='confirmed'");$q->execute([$id]);echo json_encode(['booked'=>$q->fetchAll(PDO::FETCH_COLUMN)]);
